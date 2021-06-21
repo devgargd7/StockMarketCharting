@@ -112,7 +112,7 @@ public class CompanyController {
 			for(stockCodeDto scDto:stockCodeDtos) {
 				CompanyStockExchangeMap csMap= new CompanyStockExchangeMap();
 				csMap.setCompanyCode(scDto.getStockCode());
-				StockExchange se =  stockExchangeDao.getByStockExchangeName(scDto.getStockExchange()).orElseThrow();
+				StockExchange se =  stockExchangeDao.getByStockExchangeName(scDto.getStockExchange());
 				for (CompanyStockExchangeMap oldSc : oldStockCodes) {
 					if(se == oldSc.getStockExchange()) csMap.setId(oldSc.getId());
 				}
@@ -153,7 +153,7 @@ public class CompanyController {
 			for(stockCodeDto scDto:stockCodeDtos) {
 				CompanyStockExchangeMap csMap= new CompanyStockExchangeMap();
 				csMap.setCompanyCode(scDto.getStockCode());
-				stockExchangeDao.getByStockExchangeName(scDto.getStockExchange()).ifPresent(csMap::setStockExchange);
+				csMap.setStockExchange(stockExchangeDao.getByStockExchangeName(scDto.getStockExchange()));
 				stockCodes.add(csMap);
 				logger.info(csMap.toString());
 			}

@@ -10,5 +10,5 @@ import com.stockmarketcharting.model.StockExchange;
 @Repository
 public interface stockExchangeDao extends JpaRepository<StockExchange, Long>{
 //	@Query
-	public Optional<StockExchange> getByStockExchangeName(String stockExchangeName);
+	public StockExchange getByStockExchangeName(String stockExchangeName);
 }
