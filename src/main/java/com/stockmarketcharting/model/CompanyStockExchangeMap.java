@@ -20,9 +20,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Table(name="company_stockexchange")
 public class CompanyStockExchangeMap {
 	

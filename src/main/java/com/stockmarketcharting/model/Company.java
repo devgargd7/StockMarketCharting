@@ -28,9 +28,6 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Table(uniqueConstraints={@UniqueConstraint(columnNames = {"companyName"})})
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class Company {
 
 	@Id
