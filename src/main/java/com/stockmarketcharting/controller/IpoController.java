@@ -100,7 +100,7 @@ public class IpoController {
 		List<StockExchange> listStockExchanges=new ArrayList<>();
 		if(se==null) return listStockExchanges;
 		for (String seName : se.split("[,]", 0)) 
-			stockExchangeDao.getByStockExchangeName(seName).ifPresent(listStockExchanges::add);
+			listStockExchanges.add(stockExchangeDao.getByStockExchangeName(seName));
 		logger.info(listStockExchanges.toString());
 		return listStockExchanges;
 	}
