@@ -15,7 +15,7 @@ import com.stockmarketcharting.model.Sector;
 public interface companyDao extends JpaRepository<Company,Long>{
 
 //	public Optional<Company> getByStockCode(String companyCode);
-	public Optional<Company> getByCompanyName(String companyName);
+	public Company getByCompanyName(String companyName);
 	public List<Company> findByCompanyNameIgnoreCaseContaining(String companyName);
 	public List<Company> findBySector(Sector sector);
 	

@@ -9,6 +9,6 @@ import com.stockmarketcharting.model.Sector;
 
 public interface sectorDao extends JpaRepository<Sector, Long>{
 	
-	public Optional<Sector> getBySectorName(String sectorName);
+	public Sector getBySectorName(String sectorName);
 //	public List<Sector> findBySectorName(String sectorName);
 }

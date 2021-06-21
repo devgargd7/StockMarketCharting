@@ -80,7 +80,7 @@ public class IpoController {
 		//Check for ipo name before saving
 		try {
 			IPO ipo = new IPO();
-			ipo.setCompany(companyDao.getByCompanyName(ipoDto.getCompanyName()).orElseThrow());
+			ipo.setCompany(companyDao.getByCompanyName(ipoDto.getCompanyName()));
 			ipo.setStockExchanges(getStockExchanges(ipoDto.getStockExchanges()));
 			ipo.setPricePerShare(ipoDto.getPricePerShare());
 			ipo.setTotalNumberOfShare(ipoDto.getTotalNumberOfShares());

@@ -99,7 +99,7 @@ public class CompanyController {
 			companyDto companyDto = addCompanyDto.getCompanyDto();
 			Company company=new Company();
 			company.setId(id);
-			sectorDao.getBySectorName(companyDto.getSector()).ifPresentOrElse(company::setSector,Exception::new);
+			company.setSector(sectorDao.getBySectorName(companyDto.getSector()));
 			company.setBoardOfDirectors(companyDto.getBoardOfDirectors().split("[,]",0));
 			company.setCeo(companyDto.getCeo());
 			company.setCompanyName(companyDto.getCompanyName());
@@ -141,7 +141,7 @@ public class CompanyController {
 		try {//companyDto to company
 			companyDto companyDto = addCompanyDto.getCompanyDto();
 			Company company=new Company();
-			sectorDao.getBySectorName(companyDto.getSector()).ifPresentOrElse(company::setSector,Exception::new);
+			company.setSector(sectorDao.getBySectorName(companyDto.getSector()));
 			company.setBoardOfDirectors(companyDto.getBoardOfDirectors().split("[,]",0));
 			company.setCeo(companyDto.getCeo());
 			company.setCompanyName(companyDto.getCompanyName());
@@ -174,7 +174,7 @@ public class CompanyController {
 		logger.info(getStockPriceDto.toString());
 //		companyDao.getByCompanyName(getStockPriceDto.getCompany());
 		List<StockPrice> stockPriceList = stockPriceDao.findByCompanyAndStockExchangeAndDateBetween(
-				companyDao.getByCompanyName(getStockPriceDto.getCompany()).orElseThrow(),
+				companyDao.getByCompanyName(getStockPriceDto.getCompany()),
 				getStockPriceDto.getStockExchange(),
 				LocalDate.parse(getStockPriceDto.getFromDate()),
 				LocalDate.parse(getStockPriceDto.getToDate()));
@@ -182,14 +182,4 @@ public class CompanyController {
 		return ResponseEntity.ok(stockPriceList);
 	}
 	
-//	List<StockExchange> getStockExchanges(String se){
-//		List<StockExchange> listStockExchanges=new ArrayList<>();
-//		if(se==null) return listStockExchanges;
-//		for (String seName : se.split("[,]", 0)) 
-//			stockExchangeDao.getByStockExchangeName(seName).ifPresent(listStockExchanges::add);
-//		logger.info(listStockExchanges.toString());
-//		return listStockExchanges;
-//	}
-//	
-//	
 }
