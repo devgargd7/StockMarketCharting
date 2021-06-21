@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,6 +35,13 @@ public class StockExchangeController {
 	
 	@PutMapping("/admin/stockexchanges/update")
 	ResponseEntity<?> updateStockExchange(){
+		//yet to implement
+		return ResponseEntity.ok(null);
+	}
+	
+	@DeleteMapping("/admin/stockexchanges/delete/{seName}")
+	ResponseEntity<?> deleteStockExchange(@PathVariable String seName){
+		stockExchangeDao.deleteByStockExchangeName(seName);
 		return ResponseEntity.ok(null);
 	}
 	

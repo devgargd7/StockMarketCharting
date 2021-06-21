@@ -13,5 +13,5 @@ public interface stockExchangeDao extends JpaRepository<StockExchange, Long>{
 //	@Query
 	public StockExchange getByStockExchangeName(String stockExchangeName);
 	public List<StockExchange> findByStockExchangeNameIgnoreCaseContaining(String pattern);
-
+	public void deleteByStockExchangeName(String stockExchangeName);
 }
