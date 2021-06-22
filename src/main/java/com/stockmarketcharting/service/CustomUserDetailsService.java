@@ -27,7 +27,7 @@ public class CustomUserDetailsService implements UserDetailsService{
     
     private static Collection<? extends GrantedAuthority> getAuthorities (Appuser user) {
     	Set<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();
-        authorities.add(new SimpleGrantedAuthority(user.getUserType()));
+        authorities.add(new SimpleGrantedAuthority(user.getUserType().name()));
         return authorities;
     }
     
@@ -50,7 +50,7 @@ public class CustomUserDetailsService implements UserDetailsService{
     private Set getAuthority(Appuser user) {
         Set authorities = new HashSet<>();
 //		user.getUserType().forEach(role -> {
-            authorities.add(new SimpleGrantedAuthority("ROLE_" + user.getUserType()));
+            authorities.add(new SimpleGrantedAuthority("ROLE_" + user.getUserType().name()));
 //		});
 		return authorities;
 	}

@@ -17,7 +17,7 @@ public class AuthenticationResponse{
 		this.token = jwt;
 		this.username = user.getUsername();
 		this.password = user.getPassword();
-		this.userType = user.getUserType();
+		this.userType = user.getUserType().name();
 		this.email = user.getEmail();
 		this.mobileNumber = user.getMobileNumber();
 		this.confirmed = user.isConfirmed();
