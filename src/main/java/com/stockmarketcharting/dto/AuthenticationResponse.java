@@ -1,6 +1,6 @@
 package com.stockmarketcharting.dto;
 
-import com.stockmarketcharting.model.AppUser;
+import com.stockmarketcharting.model.Appuser;
 
 public class AuthenticationResponse{
 
@@ -13,7 +13,7 @@ public class AuthenticationResponse{
 	private final String token;
 
 
-	public AuthenticationResponse(String jwt, AppUser user) {
+	public AuthenticationResponse(String jwt, Appuser user) {
 		this.token = jwt;
 		this.username = user.getUsername();
 		this.password = user.getPassword();

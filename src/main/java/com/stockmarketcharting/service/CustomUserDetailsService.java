@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.stockmarketcharting.dao.UserDao;
-import com.stockmarketcharting.model.AppUser;
+import com.stockmarketcharting.model.Appuser;
 
 @Service
 @Transactional
@@ -25,7 +25,7 @@ public class CustomUserDetailsService implements UserDetailsService{
     @Autowired
     private UserDao userDao;
     
-    private static Collection<? extends GrantedAuthority> getAuthorities (AppUser user) {
+    private static Collection<? extends GrantedAuthority> getAuthorities (Appuser user) {
     	Set<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();
         authorities.add(new SimpleGrantedAuthority(user.getUserType()));
         return authorities;
@@ -33,7 +33,7 @@ public class CustomUserDetailsService implements UserDetailsService{
     
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
     	
-        AppUser user = userDao.findByUsername(username);
+        Appuser user = userDao.findByUsername(username);
         if (user == null) {
         	throw new UsernameNotFoundException("No user found with username: " + username);
         }
@@ -47,7 +47,7 @@ public class CustomUserDetailsService implements UserDetailsService{
           credentialsNonExpired, accountNonLocked, getAuthority(user));
     }
     
-    private Set getAuthority(AppUser user) {
+    private Set getAuthority(Appuser user) {
         Set authorities = new HashSet<>();
 //		user.getUserType().forEach(role -> {
             authorities.add(new SimpleGrantedAuthority("ROLE_" + user.getUserType()));

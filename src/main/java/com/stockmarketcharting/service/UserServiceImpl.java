@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 
 import com.stockmarketcharting.Exception.EmailExistsException;
 import com.stockmarketcharting.dao.UserDao;
-import com.stockmarketcharting.model.AppUser;
+import com.stockmarketcharting.model.Appuser;
 
 
 @Service
@@ -29,12 +29,12 @@ public class UserServiceImpl implements UserService{
 	    private PasswordEncoder passwordEncoder;
 
 	@Override
-	public AppUser findUserByEmail(String email) {
+	public Appuser findUserByEmail(String email) {
 		return userDao.findByEmail(email);
 	}
 
 	 @Override
-	    public void saveUser(AppUser user) 
+	    public void saveUser(Appuser user) 
 	    		//throws EmailExistsException{
 	    {
 //		 if(userDao.findByEmail(user.getEmail()) != null)
@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService{
 	 }
 	 
 	 @Override
-	    public void updateUser(AppUser user) {
+	    public void updateUser(Appuser user) {
  
 	
 		    userDao.save(user);
@@ -57,31 +57,31 @@ public class UserServiceImpl implements UserService{
 	 }
 
 	 @Override
-	 public void updatePassword(String newPassword, AppUser user){
+	 public void updatePassword(String newPassword, Appuser user){
 	 	String encodedPasword = passwordEncoder.encode(newPassword);
 	    user.setPassword(encodedPasword);
 	    userDao.save(user);
 	 }
 	 
 	 @Override
-	 public void updateMobile(String newMobile, AppUser user) {
+	 public void updateMobile(String newMobile, Appuser user) {
 		 user.setEmail(newMobile);
 		 userDao.save(user);
 	 }
 	 
 	@Override
-	public AppUser findById(Long id) {
+	public Appuser findById(Long id) {
 		return userDao.getById(id);
 	}
 
 	@Override
-	public List<AppUser> getAllUsers() {
+	public List<Appuser> getAllUsers() {
 		return userDao.findAll();
 	}
 
 	@Override
-	public AppUser findUserByUserName(String username) throws UsernameNotFoundException {
-		AppUser user = userDao.findByUsername(username);
+	public Appuser findUserByUserName(String username) throws UsernameNotFoundException {
+		Appuser user = userDao.findByUsername(username);
 		return user;
 	}
 

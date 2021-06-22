@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 
 
 @Entity
-public class AppUser {
+public class Appuser {
 
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
@@ -34,7 +34,6 @@ public class AppUser {
 	
 	private String mobileNumber;
 	
-	@Column(columnDefinition = "bit default 0")
 	private boolean confirmed = false;
 	
 	
@@ -119,7 +118,7 @@ public class AppUser {
 	}
 
 	
-	public AppUser(Integer id, String username, String password, Role userType, String email, String mobileNumber,
+	public Appuser(Integer id, String username, String password, Role userType, String email, String mobileNumber,
 			boolean confirmed) {
 		super();
 		this.id = id;
@@ -131,7 +130,7 @@ public class AppUser {
 		this.confirmed = confirmed;
 	}
 
-	public AppUser( String username, String password, String email, String mobileNumber) {
+	public Appuser( String username, String password, String email, String mobileNumber) {
 		super();
 //		this.id = id;
 		this.username = username;
@@ -156,14 +155,14 @@ public class AppUser {
 	
 
 	
-	public AppUser() {
+	public Appuser() {
 		super();
 		this.confirmed=false;
 	}
 
 
 
-	public AppUser(String username, String password, Role userType, String email, String mobileNumber,
+	public Appuser(String username, String password, Role userType, String email, String mobileNumber,
 			boolean confirmed) {
 		super();
 		this.username = username;
