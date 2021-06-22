@@ -8,29 +8,29 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import com.stockmarketcharting.Exception.EmailExistsException;
 import com.stockmarketcharting.Exception.UsernameExistsException;
-import com.stockmarketcharting.model.User;
+import com.stockmarketcharting.model.UserEntity;
 
 
 public interface UserService{
 	
-    User findUserByEmail(String email);
-    User findUserByUserName(String username) throws UsernameNotFoundException;
-    void saveUser(User user) throws EmailExistsException, UsernameExistsException;
-    public void updateUser(User user);
+    UserEntity findUserByEmail(String email);
+    UserEntity findUserByUserName(String username) throws UsernameNotFoundException;
+    void saveUser(UserEntity user) throws EmailExistsException, UsernameExistsException;
+    public void updateUser(UserEntity user);
 //    Boolean removeAll();
 
 //    void removeById(Long id);
 
-    User findById(Long id);
+    UserEntity findById(Long id);
 
-    public void updatePassword(String newPassword, User user);
-    public void updateMobile(String newMobile, User user);
+    public void updatePassword(String newPassword, UserEntity user);
+    public void updateMobile(String newMobile, UserEntity user);
     
 //    Page<User> searchByTerm(String name, Pageable pageable);
 //
 //    Page<User> listUsers(Pageable pageable);
 //
-    List<User> getAllUsers();
+    List<UserEntity> getAllUsers();
     
     
 }

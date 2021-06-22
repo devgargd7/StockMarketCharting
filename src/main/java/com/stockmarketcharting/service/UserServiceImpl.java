@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 
 import com.stockmarketcharting.Exception.EmailExistsException;
 import com.stockmarketcharting.dao.UserDao;
-import com.stockmarketcharting.model.User;
+import com.stockmarketcharting.model.UserEntity;
 
 
 @Service
@@ -29,12 +29,12 @@ public class UserServiceImpl implements UserService{
 	    private PasswordEncoder passwordEncoder;
 
 	@Override
-	public User findUserByEmail(String email) {
+	public UserEntity findUserByEmail(String email) {
 		return userDao.findByEmail(email);
 	}
 
 	 @Override
-	    public void saveUser(User user) throws EmailExistsException{
+	    public void saveUser(UserEntity user) throws EmailExistsException{
     
 		 if(userDao.findByEmail(user.getEmail()) != null)
 			 throw new EmailExistsException();
@@ -48,7 +48,7 @@ public class UserServiceImpl implements UserService{
 	 }
 	 
 	 @Override
-	    public void updateUser(User user) {
+	    public void updateUser(UserEntity user) {
  
 	
 		    userDao.save(user);
@@ -56,31 +56,31 @@ public class UserServiceImpl implements UserService{
 	 }
 
 	 @Override
-	 public void updatePassword(String newPassword, User user){
+	 public void updatePassword(String newPassword, UserEntity user){
 	 	String encodedPasword = passwordEncoder.encode(newPassword);
 	    user.setPassword(encodedPasword);
 	    userDao.save(user);
 	 }
 	 
 	 @Override
-	 public void updateMobile(String newMobile, User user) {
+	 public void updateMobile(String newMobile, UserEntity user) {
 		 user.setEmail(newMobile);
 		 userDao.save(user);
 	 }
 	 
 	@Override
-	public User findById(Long id) {
+	public UserEntity findById(Long id) {
 		return userDao.getById(id);
 	}
 
 	@Override
-	public List<User> getAllUsers() {
+	public List<UserEntity> getAllUsers() {
 		return userDao.findAll();
 	}
 
 	@Override
-	public User findUserByUserName(String username) throws UsernameNotFoundException {
-		User user = userDao.findByUsername(username);
+	public UserEntity findUserByUserName(String username) throws UsernameNotFoundException {
+		UserEntity user = userDao.findByUsername(username);
 		return user;
 	}
 
