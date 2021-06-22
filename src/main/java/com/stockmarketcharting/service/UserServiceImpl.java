@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 
 import com.stockmarketcharting.Exception.EmailExistsException;
 import com.stockmarketcharting.dao.UserDao;
-import com.stockmarketcharting.model.Appuser;
+import com.stockmarketcharting.model.Authuser;
 
 
 @Service
@@ -29,12 +29,12 @@ public class UserServiceImpl implements UserService{
 	    private PasswordEncoder passwordEncoder;
 
 	@Override
-	public Appuser findUserByEmail(String email) {
+	public Authuser findUserByEmail(String email) {
 		return userDao.findByEmail(email);
 	}
 
 	 @Override
-	    public void saveUser(Appuser user) 
+	    public void saveUser(Authuser user) 
 	    		//throws EmailExistsException{
 	    {
 //		 if(userDao.findByEmail(user.getEmail()) != null)
@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService{
 	 }
 	 
 	 @Override
-	    public void updateUser(Appuser user) {
+	    public void updateUser(Authuser user) {
  
 	
 		    userDao.save(user);
@@ -57,31 +57,31 @@ public class UserServiceImpl implements UserService{
 	 }
 
 	 @Override
-	 public void updatePassword(String newPassword, Appuser user){
+	 public void updatePassword(String newPassword, Authuser user){
 	 	String encodedPasword = passwordEncoder.encode(newPassword);
 	    user.setPassword(encodedPasword);
 	    userDao.save(user);
 	 }
 	 
 	 @Override
-	 public void updateMobile(String newMobile, Appuser user) {
+	 public void updateMobile(String newMobile, Authuser user) {
 		 user.setEmail(newMobile);
 		 userDao.save(user);
 	 }
 	 
 	@Override
-	public Appuser findById(Long id) {
+	public Authuser findById(Long id) {
 		return userDao.getById(id);
 	}
 
 	@Override
-	public List<Appuser> getAllUsers() {
+	public List<Authuser> getAllUsers() {
 		return userDao.findAll();
 	}
 
 	@Override
-	public Appuser findUserByUserName(String username) throws UsernameNotFoundException {
-		Appuser user = userDao.findByUsername(username);
+	public Authuser findUserByUserName(String username) throws UsernameNotFoundException {
+		Authuser user = userDao.findByUsername(username);
 		return user;
 	}
 

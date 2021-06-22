@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 
 
 @Entity
-public class Appuser {
+public class Authuser {
 
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
@@ -36,12 +36,12 @@ public class Appuser {
 	
 	private boolean confirmed = false;
 
-	public Appuser() {
+	public Authuser() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Appuser(Integer id, String username, String password, Role userType, String email, String mobileNumber,
+	public Authuser(Integer id, String username, String password, Role userType, String email, String mobileNumber,
 			boolean confirmed) {
 		super();
 		this.id = id;
