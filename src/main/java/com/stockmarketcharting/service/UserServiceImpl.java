@@ -34,17 +34,18 @@ public class UserServiceImpl implements UserService{
 	}
 
 	 @Override
-	    public void saveUser(UserEntity user) throws EmailExistsException{
-    
-		 if(userDao.findByEmail(user.getEmail()) != null)
-			 throw new EmailExistsException();
-		 else {
+	    public void saveUser(UserEntity user) 
+	    		//throws EmailExistsException{
+	    {
+//		 if(userDao.findByEmail(user.getEmail()) != null)
+//			 throw new EmailExistsException();
+//		 else {
 			String encodedPasword = passwordEncoder.encode(user.getPassword());
 //			System.out.println(encodedPasword);
 		    user.setPassword(encodedPasword);
 
 		    userDao.save(user);
-		 }
+//		 }
 	 }
 	 
 	 @Override

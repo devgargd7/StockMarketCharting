@@ -15,7 +15,7 @@ public interface UserService{
 	
     UserEntity findUserByEmail(String email);
     UserEntity findUserByUserName(String username) throws UsernameNotFoundException;
-    void saveUser(UserEntity user) throws EmailExistsException, UsernameExistsException;
+    void saveUser(UserEntity user); //throws EmailExistsException, UsernameExistsException;
     public void updateUser(UserEntity user);
 //    Boolean removeAll();
 

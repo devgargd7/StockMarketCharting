@@ -91,21 +91,21 @@ public class UserController {
     }
 	
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-	public ResponseEntity<?> registerUserAccount (@RequestBody UserEntity user, HttpServletRequest request
-//	  Errors errors
-	  ) throws EmailExistsException, Exception {
+	public ResponseEntity<?> registerUserAccount (@RequestBody UserEntity user, HttpServletRequest request) 
+			//throws EmailExistsException, Exception 
+	{
 	    
 //    	if(user.getUserType() == null) {
 //    		user.setUserType();
 //    	}
     	
-    	try {
+//    	try {
 	        userService.saveUser(user);
-	    } catch (EmailExistsException eeEx) {
-	    	ResponseEntity.badRequest().body("Email Aready Exists");
-	    } catch (Exception e) {
-	    	ResponseEntity.badRequest().body(e);
-	    }
+//	    } catch (EmailExistsException eeEx) {
+//	    	ResponseEntity.badRequest().body("Email Aready Exists");
+//	    } catch (Exception e) {
+//	    	ResponseEntity.badRequest().body(e);
+//	    }
 	    
 
 	    return ResponseEntity.ok(user);

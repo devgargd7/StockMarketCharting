@@ -15,7 +15,6 @@ import lombok.NoArgsConstructor;
 
 
 @Entity
-@Table(name = "user_table")
 public class UserEntity {
 
 	@Id
