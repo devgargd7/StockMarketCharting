@@ -38,9 +38,7 @@ public class StockPrice {
 
 	private Integer currentPrice;
 	
-	@CreationTimestamp
 	private LocalDate date;
-	@CreationTimestamp
 	private LocalTime time;
 	
 	

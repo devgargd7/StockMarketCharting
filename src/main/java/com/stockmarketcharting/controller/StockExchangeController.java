@@ -39,9 +39,9 @@ public class StockExchangeController {
 		return ResponseEntity.ok(null);
 	}
 	
-	@DeleteMapping("/admin/stockexchanges/delete/{seName}")
-	ResponseEntity<?> deleteStockExchange(@PathVariable String seName){
-		stockExchangeDao.deleteByStockExchangeName(seName);
+	@DeleteMapping("/admin/stockexchanges/delete/{id}")
+	ResponseEntity<?> deleteStockExchange(@PathVariable Long id){
+		stockExchangeDao.deleteById(id);
 		return ResponseEntity.ok(null);
 	}
 	
