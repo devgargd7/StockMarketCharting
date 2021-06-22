@@ -44,7 +44,7 @@ import com.stockmarketcharting.Exception.UsernameExistsException;
 import com.stockmarketcharting.dao.UserDao;
 import com.stockmarketcharting.dto.AuthenticationRequest;
 import com.stockmarketcharting.dto.AuthenticationResponse;
-import com.stockmarketcharting.model.UserEntity;
+import com.stockmarketcharting.model.AppUser;
 import com.stockmarketcharting.service.CustomUserDetailsService;
 import com.stockmarketcharting.service.UserService;
 import com.stockmarketcharting.util.JwtUtil;
@@ -80,18 +80,18 @@ public class UserController {
 
 		final UserDetails userDetails = userDetailsService
 				.loadUserByUsername(authenticationRequest.getUsername());
-		final UserEntity user = userService.findUserByUserName(authenticationRequest.getUsername());
+		final AppUser user = userService.findUserByUserName(authenticationRequest.getUsername());
 		final String jwt = jwtTokenUtil.generateToken(userDetails);
 		return ResponseEntity.status(HttpStatus.OK).body(new AuthenticationResponse(jwt, user));
 	}
 
     @GetMapping("/users")
-    public List<UserEntity> getAllUsers() {
+    public List<AppUser> getAllUsers() {
     	return userService.getAllUsers();
     }
 	
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-	public ResponseEntity<?> registerUserAccount (@RequestBody UserEntity user, HttpServletRequest request) 
+	public ResponseEntity<?> registerUserAccount (@RequestBody AppUser user, HttpServletRequest request) 
 			//throws EmailExistsException, Exception 
 	{
 	    
@@ -126,7 +126,7 @@ public class UserController {
 	        }
 	        
 	        try{
-	        	UserEntity user = userService.findUserByUserName(username);
+	        	AppUser user = userService.findUserByUserName(username);
 	        	userService.updatePassword(password, user);
 	        }catch(UsernameNotFoundException e) {
 	        	return ResponseEntity.badRequest().body(e);
@@ -150,7 +150,7 @@ public class UserController {
 	        }
 	        
 	        try{
-	        	UserEntity user = userService.findUserByUserName(username);
+	        	AppUser user = userService.findUserByUserName(username);
 	        	userService.updateMobile(mobileNumber, user);
 	        }catch(UsernameNotFoundException e) {
 	        	return ResponseEntity.badRequest().body(e);
@@ -161,7 +161,7 @@ public class UserController {
 	
 	@GetMapping("/confirm/{username}")
 	ResponseEntity<?> confirmUser(@PathVariable String username){
-		UserEntity user = userService.findUserByUserName(username);
+		AppUser user = userService.findUserByUserName(username);
 		user.setConfirmed(true);
 		try {
 			userService.updateUser(user);

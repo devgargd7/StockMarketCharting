@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 
 import com.stockmarketcharting.Exception.EmailExistsException;
 import com.stockmarketcharting.dao.UserDao;
-import com.stockmarketcharting.model.UserEntity;
+import com.stockmarketcharting.model.AppUser;
 
 
 @Service
@@ -29,12 +29,12 @@ public class UserServiceImpl implements UserService{
 	    private PasswordEncoder passwordEncoder;
 
 	@Override
-	public UserEntity findUserByEmail(String email) {
+	public AppUser findUserByEmail(String email) {
 		return userDao.findByEmail(email);
 	}
 
 	 @Override
-	    public void saveUser(UserEntity user) 
+	    public void saveUser(AppUser user) 
 	    		//throws EmailExistsException{
 	    {
 //		 if(userDao.findByEmail(user.getEmail()) != null)
@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService{
 	 }
 	 
 	 @Override
-	    public void updateUser(UserEntity user) {
+	    public void updateUser(AppUser user) {
  
 	
 		    userDao.save(user);
@@ -57,31 +57,31 @@ public class UserServiceImpl implements UserService{
 	 }
 
 	 @Override
-	 public void updatePassword(String newPassword, UserEntity user){
+	 public void updatePassword(String newPassword, AppUser user){
 	 	String encodedPasword = passwordEncoder.encode(newPassword);
 	    user.setPassword(encodedPasword);
 	    userDao.save(user);
 	 }
 	 
 	 @Override
-	 public void updateMobile(String newMobile, UserEntity user) {
+	 public void updateMobile(String newMobile, AppUser user) {
 		 user.setEmail(newMobile);
 		 userDao.save(user);
 	 }
 	 
 	@Override
-	public UserEntity findById(Long id) {
+	public AppUser findById(Long id) {
 		return userDao.getById(id);
 	}
 
 	@Override
-	public List<UserEntity> getAllUsers() {
+	public List<AppUser> getAllUsers() {
 		return userDao.findAll();
 	}
 
 	@Override
-	public UserEntity findUserByUserName(String username) throws UsernameNotFoundException {
-		UserEntity user = userDao.findByUsername(username);
+	public AppUser findUserByUserName(String username) throws UsernameNotFoundException {
+		AppUser user = userDao.findByUsername(username);
 		return user;
 	}
 

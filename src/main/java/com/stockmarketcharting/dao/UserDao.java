@@ -5,15 +5,15 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import com.stockmarketcharting.model.UserEntity;
+import com.stockmarketcharting.model.AppUser;
 
 @Repository
-public interface UserDao extends JpaRepository<UserEntity,Long>{
+public interface UserDao extends JpaRepository<AppUser,Long>{
 
 	@Query
-	public UserEntity findByUsername(String username);
+	public AppUser findByUsername(String username);
 	
 	@Query
-	public UserEntity findByEmail(String email);
+	public AppUser findByEmail(String email);
 	
 }

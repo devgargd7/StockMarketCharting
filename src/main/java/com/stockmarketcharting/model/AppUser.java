@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 
 
 @Entity
-public class UserEntity {
+public class AppUser {
 
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
@@ -119,7 +119,7 @@ public class UserEntity {
 	}
 
 	
-	public UserEntity(Integer id, String username, String password, Role userType, String email, String mobileNumber,
+	public AppUser(Integer id, String username, String password, Role userType, String email, String mobileNumber,
 			boolean confirmed) {
 		super();
 		this.id = id;
@@ -131,7 +131,7 @@ public class UserEntity {
 		this.confirmed = confirmed;
 	}
 
-	public UserEntity( String username, String password, String email, String mobileNumber) {
+	public AppUser( String username, String password, String email, String mobileNumber) {
 		super();
 //		this.id = id;
 		this.username = username;
@@ -156,14 +156,14 @@ public class UserEntity {
 	
 
 	
-	public UserEntity() {
+	public AppUser() {
 		super();
 		this.confirmed=false;
 	}
 
 
 
-	public UserEntity(String username, String password, Role userType, String email, String mobileNumber,
+	public AppUser(String username, String password, Role userType, String email, String mobileNumber,
 			boolean confirmed) {
 		super();
 		this.username = username;
