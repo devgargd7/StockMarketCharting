@@ -12,6 +12,9 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.stockmarketcharting.service.CustomUserDetailsService;
 
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.SignatureException;
+
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -38,7 +41,15 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
         if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
             jwt = authorizationHeader.substring(7);
-            username = jwtUtil.extractUsername(jwt);
+            try{
+            	username = jwtUtil.extractUsername(jwt);
+            } catch (IllegalArgumentException e) {
+                logger.error("an error occured during getting username from token", e);
+            } catch (ExpiredJwtException e) {
+                logger.warn("the token is expired and not valid anymore", e);
+            } catch(SignatureException e){
+                logger.error("Authentication Failed. Username or Password not valid.");
+            }
         }
 
 
