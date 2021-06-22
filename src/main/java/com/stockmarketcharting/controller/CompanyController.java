@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.datetime.DateFormatter;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -63,13 +64,14 @@ public class CompanyController {
 	
 	
 
-
+//	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("admin/companies/sector/{sectorId}")
 	ResponseEntity<?> getBySector(@PathVariable Long sectorId){
 //		System.out.println(companyDao.findBySector(sector));
 		return ResponseEntity.ok(companyDao.findBySectorId(sectorId));
 	}
 	
+//	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("admin/companies")
 	ResponseEntity<?> getAllCompanies(){
 //		System.out.println(companyDao.findAll());
@@ -78,6 +80,12 @@ public class CompanyController {
 	
 	@GetMapping("admin/companies/{pattern}")
 	ResponseEntity<?> getAllCompaniesMatching(@PathVariable String pattern){
+		System.out.println(companyDao.findByCompanyNameIgnoreCaseContaining(pattern));
+		return ResponseEntity.ok(companyDao.findByCompanyNameIgnoreCaseContaining(pattern));
+	}
+	
+	@GetMapping("user/companies/{pattern}")
+	ResponseEntity<?> getAllCompaniesMatchingUser(@PathVariable String pattern){
 		System.out.println(companyDao.findByCompanyNameIgnoreCaseContaining(pattern));
 		return ResponseEntity.ok(companyDao.findByCompanyNameIgnoreCaseContaining(pattern));
 	}
@@ -169,6 +177,7 @@ public class CompanyController {
 	    return ResponseEntity.ok(response);
 	}
 
+//	@PreAuthorize("hasRole('USER')")
 	@PostMapping("/user/companies/stockprice")
 	ResponseEntity<?> getStockPrice(@RequestBody getStockPriceDto getStockPriceDto){
 		logger.info(getStockPriceDto.toString());
@@ -178,7 +187,7 @@ public class CompanyController {
 				getStockPriceDto.getStockExchange(),
 				LocalDate.parse(getStockPriceDto.getFromDate()),
 				LocalDate.parse(getStockPriceDto.getToDate()));
-		System.out.println(stockPriceList);
+//		System.out.println(stockPriceList);
 		return ResponseEntity.ok(stockPriceList);
 	}
 	

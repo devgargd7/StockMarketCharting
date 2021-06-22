@@ -28,15 +28,43 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 
+	@Autowired
+	private UserDetailsService userDetailsService;
+
+	@Autowired
+	private com.stockmarketcharting.util.JwtRequestFilter JwtRequestFilter;
+	
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+//		return NoOpPasswordEncoder.getInstance();
+	}
+	
+	@Autowired
+	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+//		auth.authenticationProvider(authProvider());
+//		auth.jdbcAuthentication().and()
+		auth.userDetailsService(userDetailsService).passwordEncoder(this.passwordEncoder());
+	}
+	
+	@Override
+	@Bean
+	public AuthenticationManager authenticationManagerBean() throws Exception {
+		return super.authenticationManagerBean();
+	}
+
+	
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
-		httpSecurity.csrf().disable().cors();
-//		.and()
-//				.authorizeRequests().antMatchers("/authenticate","/register").permitAll().
-//						anyRequest().authenticated().and().
-//						exceptionHandling().and().sessionManagement()
-//				.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-//		httpSecurity.addFilterBefore(JwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+		httpSecurity.csrf().disable().cors()
+		.and()
+				.authorizeRequests().antMatchers("/authenticate","/register","/**").permitAll()
+				.antMatchers("/admin/**,/user/**").hasRole("ADMIN")
+				.antMatchers("/user/**").hasRole("USER")
+						.anyRequest().authenticated().and().
+						exceptionHandling().and().sessionManagement()
+				.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+		httpSecurity.addFilterBefore(JwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 		httpSecurity.headers().frameOptions().disable();
 	}
 	
