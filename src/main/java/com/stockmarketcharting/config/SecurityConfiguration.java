@@ -75,7 +75,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	    @Override
 	    public void addCorsMappings(CorsRegistry corsRegistry) {
 	        corsRegistry.addMapping("/**")
-	                .allowedOrigins("http://localhost:4200","https://shrouded-waters-11504.herokuapp.com/")
+	                .allowedOrigins("http://localhost:4200","https://shrouded-waters-11504.herokuapp.com/","https://stockmarketcharting-angular.herokuapp.com")
 	                .allowedMethods("*")
 	                .maxAge(3600L)
 	                .allowedHeaders("*")
